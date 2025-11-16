@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: telegram-mini-app
+    env: php
+    buildCommand: |
+      composer install --no-dev --optimize-autoloader
+      php artisan config:cache
+      php artisan route:cache
+      php artisan view:cache
+    startCommand: "php artisan serve --host=0.0.0.0 --port=$PORT"
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: DB_HOST
+        value: your-db-host
+      - key: DB_DATABASE
+        value: your-db-name
+      - key: DB_USERNAME
+        value: your-db-username
+      - key: DB_PASSWORD
+        value: your-db-password
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      #- key: YOOKASSA_ACCOUNT_ID
+       # sync: false
+      #- key: YOOKASSA_SECRET_KEY
+       # sync: false
+      - key: YANDEX_MAP_API_KEY
+        sync: false
